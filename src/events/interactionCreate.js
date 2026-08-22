@@ -50,6 +50,7 @@ function withTraceContext(context = {}, traceContext = {}) {
 export default {
   name: Events.InteractionCreate,
   async execute(interaction, client) {
+    console.log("🔥 INTERACTION RECEIVED:", interaction.type, interaction.commandName);
     const interactionTraceContext = createInteractionTraceContext(interaction);
     interaction.traceContext = interactionTraceContext;
     interaction.traceId = interactionTraceContext.traceId;
