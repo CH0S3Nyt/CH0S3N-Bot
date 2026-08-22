@@ -1,3 +1,4 @@
+console.log("🔥 interactionCreate.js LOADED");
 import { Events, MessageFlags } from 'discord.js';
 import { logger } from '../utils/logger.js';
 import { getGuildConfig } from '../services/config/guildConfig.js';
