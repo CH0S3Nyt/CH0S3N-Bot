@@ -166,6 +166,7 @@ export async function getLevelingConfig(client, guildId) {
   } catch (error) {
     logger.error(`Error getting leveling config for guild ${guildId}:`, error);
     return {
+      configured: true,
       enabled: true,
       xpPerMessage: { min: 15, max: 25 },
       xpCooldown: 20,
