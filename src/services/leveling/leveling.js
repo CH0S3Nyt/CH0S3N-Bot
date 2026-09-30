@@ -149,7 +149,7 @@ export function createLeaderboardEmbed(leaderboard, guild) {
 
 export async function getLevelingConfig(client, guildId) {
   const defaultConfig = {
-    configured: true,
+    configured: false,
     enabled: true,
     xpPerMessage: { min: 15, max: 25 },
     xpCooldown: 20,
