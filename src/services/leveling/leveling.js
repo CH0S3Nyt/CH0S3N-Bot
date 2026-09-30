@@ -148,24 +148,34 @@ export function createLeaderboardEmbed(leaderboard, guild) {
 }
 
 export async function getLevelingConfig(client, guildId) {
+  const defaultConfig = {
+    configured: true,
+    enabled: true,
+    xpPerMessage: { min: 15, max: 25 },
+    xpCooldown: 20,
+    levelUpMessage: '{user} has leveled up to level {level}!',
+    levelUpChannel: null,
+    ignoredChannels: [],
+    ignoredRoles: [],
+    blacklistedUsers: [],
+    roleRewards: {},
+    announceLevelUp: true,
+    xpMultiplier: 1
+  };
+
   try {
     const guildConfig = await getGuildConfig(client, guildId);
-    return guildConfig.leveling || {
-      enabled: true,
-      xpPerMessage: { min: 15, max: 25 },
-      xpCooldown: 20,
-      levelUpMessage: '{user} has leveled up to level {level}!',
-      levelUpChannel: null,
-      ignoredChannels: [],
-      ignoredRoles: [],
-      blacklistedUsers: [],
-      roleRewards: {},
-      announceLevelUp: true,
-      xpMultiplier: 1
+
+    return {
+      ...defaultConfig,
+      ...(guildConfig?.leveling || {}),
+      configured: guildConfig?.leveling?.configured ?? true
     };
   } catch (error) {
     logger.error(`Error getting leveling config for guild ${guildId}:`, error);
-    return {
+    return defaultConfig;
+  }
+}
       configured: true,
       enabled: true,
       xpPerMessage: { min: 15, max: 25 },
